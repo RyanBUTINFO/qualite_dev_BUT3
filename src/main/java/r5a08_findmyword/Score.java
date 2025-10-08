@@ -1,25 +1,32 @@
 package r5a08_findmyword;
 
-public class Score {
-    private String word;
-    private Letter[] letters;
+import java.util.Arrays;
 
-    public Score(String word) {
-        this.word = word;
-        this.letters = new Letter[word.length()];
+public class Score {
+    private final String correct;
+    private Letter[] results;
+
+    public Score(String correct) {
+        this.correct = correct;
+        this.results = new Letter[correct.length()];
+        Arrays.fill(results, Letter.INCORRECT);
     }
 
-    public void assess(int index, String attempt) {
-        char attemptLetter = attempt.charAt(index);
-        char correctLetter = word.charAt(index);
-        if (attemptLetter == correctLetter) {
-            letters[index] = Letter.CORRECT;
-        } else {
-            letters[index] = Letter.INCORRECT;
+    public Letter letter(int i) {
+        return results[i];
+    }
+
+    public void assess(String attempt) {
+        for (int i = 0; i < attempt.length(); i++) {
+            if (assertIsCorrectLetter(i, attempt, correct)) {
+                results[i] = Letter.CORRECT;
+            } else {
+                results[i] = Letter.INCORRECT;
+            }
         }
     }
 
-    public Letter letter(int index) {
-        return letters[index];
+    private boolean assertIsCorrectLetter(int position, String attempt, String correct) {
+        return correct.charAt(position) == attempt.charAt(position);
     }
 }
