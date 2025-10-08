@@ -1,7 +1,7 @@
-    package r5a08_findmyword;
+package r5a08_findmyword;
 
-    public enum Letter {
-        CORRECT,
-        PART_CORRECT,
-        INCORRECT
-    }
+public enum Letter {
+    CORRECT,
+    PART_CORRECT,
+    INCORRECT
+}
